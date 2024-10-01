@@ -1,0 +1,41 @@
+name: Build Package
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        required: true
+        type: string
+      run-build-command:
+        required: false
+        default: false
+        type: boolean
+      upload-artifact:
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build-package:
+    name: Build Package
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.package }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - run: pnpm install
+    - run: pnpm install --frozen-lockfile
+    - run: pnpm build
+      if: ${{ inputs.run-build-command }}
+    - uses: actions/upload-artifact@v3
+      if: ${{ inputs.upload-artifact }}
+      with:
+        name: ${{ inputs.package }}
+        path: ${{ inputs.package }}/dist
