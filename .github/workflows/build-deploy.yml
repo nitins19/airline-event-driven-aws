@@ -13,7 +13,7 @@ permissions:
 jobs:
   build-infra:
     name: "Build Infra"
-    uses: ./github/workflows/build.yml
+    uses: ./.github/workflows/build.yml
     with:
       package: infra
 
@@ -21,7 +21,7 @@ jobs:
     name: "Deploy"
     needs:
       [build-infra]
-    uses: ./github/workflows/deploy.yml
+    uses: ./.github/workflows/deploy.yml
     with:
       aws-account-number: "950674754583"
       environment: Dev
