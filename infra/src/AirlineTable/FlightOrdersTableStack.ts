@@ -17,4 +17,5 @@ export default class FlightOrdersTable extends Stack {
       billingMode: BillingMode.PAY_PER_REQUEST,
     });
   }
+  
 }
