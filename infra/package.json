@@ -7,7 +7,8 @@
     "build": "pnpm synth-dev",
     "cdk": "cdk",
     "deploy": "cdk deploy",
-    "synth": "cdk synth --quiet"
+    "synth": "cdk synth --quiet",
+    "synth-dev": "export BRANCH_REF=`git branch --show current` && pnpm run synth"
   },
   "author": "",
   "license": "ISC",
