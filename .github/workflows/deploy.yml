@@ -32,9 +32,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: pnpm/action-setup@a3252b78c470e02df07e9d59298aceedc3ccd6d6 # v3.0.0
-      with:
-        version: 8.2.0
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
