@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "esbuild src/lambda.ts --bundle --platform=node --sourcemap --outfile=dist/lambda.js",
     "cdk": "cdk",
     "watch": "tsc -w"
 
