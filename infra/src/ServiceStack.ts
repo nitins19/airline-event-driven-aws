@@ -19,10 +19,6 @@ export default class ServiceStack extends Stack {
             handler: 'handler',
             timeout: Duration.seconds(10),
             memorySize: 250,
-            bundling: {
-                sourceMap: true,
-                minify: true
-            },
             logRetention: RetentionDays.FIVE_DAYS
         })
 
