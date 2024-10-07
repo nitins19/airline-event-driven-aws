@@ -23,7 +23,7 @@ jobs:
     with:
       package: service
       run-build-command: true
-      upload-artifact: true   
+      upload-artifact: false   
 
   deploy-dev:
     name: "Deploy"
@@ -34,4 +34,4 @@ jobs:
       aws-account-number: "954976306395"
       environment: Dev
       working-directory: infra
-      download-artifact: true
+      download-artifact: false
