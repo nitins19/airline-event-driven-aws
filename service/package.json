@@ -1,0 +1,15 @@
+{
+  "name": "service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "cdk": "cdk",
+    "watch": "tsc -w"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
