@@ -57,7 +57,7 @@ jobs:
       env:
         BRANCH_REF: ${{ github.ref }}
     - name: Check current directory and list files
-      run: pwd && ls -R
+      run: ls -R ..
     - run: pnpm run deploy "${{ inputs.environment }}/**" --require-approval never 
       env:
         BRANCH_REF: ${{ github.head_ref || github.ref }}
