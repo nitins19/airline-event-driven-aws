@@ -36,8 +36,3 @@ jobs:
     - run: pnpm install --frozen-lockfile
     - run: pnpm build
       if: ${{ inputs.run-build-command }}
-    - uses: actions/upload-artifact@v3
-      if: ${{ inputs.upload-artifact }}
-      with:
-        name: ${{ inputs.package }}
-        path: ${{ inputs.package }}/dist
