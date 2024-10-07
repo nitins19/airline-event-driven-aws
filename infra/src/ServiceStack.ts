@@ -16,7 +16,7 @@ export default class ServiceStack extends Stack {
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
             runtime: Runtime.NODEJS_18_X,
-            entry: '../../service/src/lambda.ts',
+            entry: '../service/src/lambda.ts',
             handler: 'handler',
             timeout: Duration.seconds(10),
             memorySize: 250,
