@@ -9,7 +9,11 @@
       "noImplicitAny": true,
       "sourceMap": true,
       "outDir": "dist",
-      "baseUrl": "."
+      "baseUrl": ".",
+      "typeRoots": [
+        "./types",
+        "node_modules/@types"
+      ]
     },
     "include": [
       "src/**/*.ts"
