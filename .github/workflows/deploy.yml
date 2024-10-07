@@ -56,6 +56,6 @@ jobs:
       run: pnpm exec cdk bootstrap aws://${{ inputs.aws-account-number }}/us-east-1
       env:
         BRANCH_REF: ${{ github.ref }}
-    - run: pnpm run deploy "${{ inputs.environment }}/**" --require-approval never
+    - run: pnpm run deploy "${{ inputs.environment }}/**" --require-approval never --verbose
       env:
         BRANCH_REF: ${{ github.head_ref || github.ref }}

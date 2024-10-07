@@ -10,7 +10,7 @@
 
   },
   "dependencies": {
-    "@types/node": "20.8.10"
+    "@types/node": "22.5.4"
   },
   "keywords": [],
   "author": "",
