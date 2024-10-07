@@ -4,6 +4,7 @@ import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { RetentionDays } from "aws-cdk-lib/aws-logs";
 import { Construct } from "constructs";
+import path from "path";
 
 interface ServiceStackProps extends StackProps { }
 
@@ -16,8 +17,8 @@ export default class ServiceStack extends Stack {
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
             runtime: Runtime.NODEJS_18_X,
-            entry: '../service/src/lambda.ts',
-            handler: 'handler',
+            entry: path.join(__dirname, "../service/src/lambda.js"),
+            handler: "index.handler",
             timeout: Duration.seconds(10),
             memorySize: 250,
             bundling: {
