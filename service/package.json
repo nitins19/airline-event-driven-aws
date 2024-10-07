@@ -9,6 +9,9 @@
     "watch": "tsc -w"
 
   },
+  "dependencies": {
+    "@types/node": "20.8.10"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
