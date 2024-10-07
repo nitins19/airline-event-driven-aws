@@ -16,7 +16,7 @@ export default class ServiceStack extends Stack {
         super(scope, id, props);
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
-            runtime: Runtime.NODEJS_18_X,
+            runtime: Runtime.NODEJS_20_X,
             entry: path.join(__dirname, "../../service/src/index.ts"),
             handler: "handler",
             architecture: Architecture.ARM_64,
