@@ -1,5 +1,5 @@
 import { Duration, Stack, StackProps } from "aws-cdk-lib";
-import { AuthorizationType, LambdaIntegration, RestApi, TokenAuthorizer } from "aws-cdk-lib/aws-apigateway";
+import { AuthorizationType, LambdaIntegration, MethodLoggingLevel, RestApi, TokenAuthorizer } from "aws-cdk-lib/aws-apigateway";
 import { Table } from "aws-cdk-lib/aws-dynamodb";
 // import { Table } from "aws-cdk-lib/aws-dynamodb";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
@@ -44,6 +44,7 @@ export default class ServiceStack extends Stack {
         this.apiGateway = new RestApi(this, 'MyApi', {
             restApiName: 'ServiceApi',
             deployOptions: {
+                loggingLevel: MethodLoggingLevel.INFO,
                 stageName: 'dev'
             }
         });
