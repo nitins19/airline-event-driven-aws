@@ -64,15 +64,15 @@ export default class ServiceStack extends Stack {
         //     resultsCacheTtl: Duration.seconds(300) // Cache authorization results for performance
         // });
 
-        // // Add a proxy resource and secure it with the OAuth authorizer
-        // const proxy = this.apiGateway.root.addProxy({
-        //     anyMethod: true,
-        //     defaultIntegration: new LambdaIntegration(serviceLambda),
-        //     defaultMethodOptions: {
-        //         authorizer: OAuthAuthorizer,
-        //         authorizationType: AuthorizationType.CUSTOM
-        //     }
-        // });
+        // Add a proxy resource and secure it with the OAuth authorizer
+        const proxy = this.apiGateway.root.addProxy({
+            anyMethod: true,
+            defaultIntegration: new LambdaIntegration(serviceLambda),
+            // defaultMethodOptions: {
+            //     authorizer: OAuthAuthorizer,
+            //     authorizationType: AuthorizationType.CUSTOM
+            // }
+        });
 
         // Create a Dead Letter Queue
         const deadLetterQueue = new Queue(this, 'DLQ', {
