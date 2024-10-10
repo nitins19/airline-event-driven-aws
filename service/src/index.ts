@@ -10,8 +10,11 @@ export const handler = async (event: any) => {
     const dynamoDb = DynamoDBDocumentClient.from(client);
 
     const TABLE_NAME = process.env.TABLE_NAME;
+    console.log('tableee name', TABLE_NAME);
     try {
         const body = JSON.parse(event.body);
+
+        console.log("flight data", body);
 
         // Generate a new orderId
         const orderId = uuidv4();
@@ -28,7 +31,7 @@ export const handler = async (event: any) => {
             paymentStatus: "Succeeded",
             createdAt: new Date().toISOString(),
         };
-
+        console.log("reached here");
         // Store the order in DynamoDB using the PutCommand
         await dynamoDb.send(
             new PutCommand({
@@ -36,7 +39,7 @@ export const handler = async (event: any) => {
                 Item: order,
             })
         );
-
+        console.log('done');
         // Return success response
         return {
             statusCode: 201,
@@ -49,7 +52,7 @@ export const handler = async (event: any) => {
         console.error("Error creating order:", error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: "Internal server error" }),
+            body: JSON.stringify({ message: "Internal server erro" }),
         };
     }
 };

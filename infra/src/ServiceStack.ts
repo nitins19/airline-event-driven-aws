@@ -43,18 +43,18 @@ export default class ServiceStack extends Stack {
         });
 
         // Define the authorizer Lambda function
-        const authorizerLambda = new NodejsFunction(this, 'AuthorizerLambda', {
-            runtime: Runtime.NODEJS_18_X,
-            entry: path.join(__dirname, "../../service/src/lambda/authorizer.ts"),
-            handler: "handler",
-            timeout: Duration.seconds(10),
-            memorySize: 250,
-            bundling: {
-                sourceMap: true,
-                minify: true
-            },
-            logRetention: RetentionDays.FIVE_DAYS
-        });
+        // const authorizerLambda = new NodejsFunction(this, 'AuthorizerLambda', {
+        //     runtime: Runtime.NODEJS_18_X,
+        //     entry: path.join(__dirname, "../../service/src/lambda/authorizer.ts"),
+        //     handler: "handler",
+        //     timeout: Duration.seconds(10),
+        //     memorySize: 250,
+        //     bundling: {
+        //         sourceMap: true,
+        //         minify: true
+        //     },
+        //     logRetention: RetentionDays.FIVE_DAYS
+        // });
 
         // // Define the authorizer
         // const OAuthAuthorizer = new TokenAuthorizer(this, 'OAuthAuthorizer', {
@@ -75,19 +75,19 @@ export default class ServiceStack extends Stack {
         });
 
         // Create a Dead Letter Queue
-        const deadLetterQueue = new Queue(this, 'DLQ', {
-            retentionPeriod: Duration.days(5) // Messages stay in the DLQ for 5 days
-        });
+        // const deadLetterQueue = new Queue(this, 'DLQ', {
+        //     retentionPeriod: Duration.days(5) // Messages stay in the DLQ for 5 days
+        // });
 
-        // Create the main SQS queue with a dead letter queue configured
-        const queue = new Queue(this, 'Queue', {
-            retentionPeriod: Duration.days(1), // Messages stay in the queue for 1 day
-            visibilityTimeout: Duration.seconds(40), // Visibility timeout of 40 seconds
-            deadLetterQueue: {
-                queue: deadLetterQueue,
-                maxReceiveCount: 5 // Move messages to DLQ after 5 failed receives
-            }
-        });
+        // // Create the main SQS queue with a dead letter queue configured
+        // const queue = new Queue(this, 'Queue', {
+        //     retentionPeriod: Duration.days(1), // Messages stay in the queue for 1 day
+        //     visibilityTimeout: Duration.seconds(40), // Visibility timeout of 40 seconds
+        //     deadLetterQueue: {
+        //         queue: deadLetterQueue,
+        //         maxReceiveCount: 5 // Move messages to DLQ after 5 failed receives
+        //     }
+        // });
 
     }
 }
