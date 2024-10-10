@@ -9,23 +9,18 @@ const dynamoDb = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = process.env.TABLE_NAME;
 
 export const handler = async (event: any) => {
-    console.log("HTTP Method: ", JSON.stringify(event, null, 2));
-    console.log('lets see', event)
-    console.log('whats in body', event.body);
-
-    console.log('tableee name', TABLE_NAME);
+    
     try {
         const body = event;
 
         console.log("flight data", body);
 
-        // Generate a new orderId
-        const orderId = uuidv4();
+        // Generate a new passengerId
+        const passengerId = uuidv4();
 
         // Create the order item
         const order = {
-            orderId: orderId,
-            passengerId: body.passengerId,
+            passengerId: passengerId,
             passengerName: body.passengerName,
             email: body.email,
             flightDetails: body.flightDetails || {},
@@ -47,8 +42,7 @@ export const handler = async (event: any) => {
         return ({
             statusCode: 200,
             body: JSON.stringify({
-                message: "Order created successfully",
-                orderId: orderId
+                message: "Order created successfully"
             }),
         });
     } catch (error) {

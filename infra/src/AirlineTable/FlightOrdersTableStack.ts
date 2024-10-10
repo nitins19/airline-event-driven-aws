@@ -11,7 +11,7 @@ export default class FlightOrdersTable extends Stack {
     super(scope, id, props);
 
     this.flightEventsTable = new Table(this, 'FlightOrderEvents', {
-      partitionKey: { name: 'orderId', type: AttributeType.STRING },
+      partitionKey: { name: 'passengerId', type: AttributeType.STRING },
       stream: StreamViewType.NEW_IMAGE,
       removalPolicy: RemovalPolicy.DESTROY,
       billingMode: BillingMode.PAY_PER_REQUEST,
