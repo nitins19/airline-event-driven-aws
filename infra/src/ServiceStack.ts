@@ -1,5 +1,6 @@
 import { Duration, Stack, StackProps } from "aws-cdk-lib";
 import { AuthorizationType, LambdaIntegration, RestApi, TokenAuthorizer } from "aws-cdk-lib/aws-apigateway";
+import { Table } from "aws-cdk-lib/aws-dynamodb";
 // import { Table } from "aws-cdk-lib/aws-dynamodb";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
@@ -19,6 +20,8 @@ export default class ServiceStack extends Stack {
     constructor(scope: Construct, id: string, props: ServiceStackProps) {
         super(scope, id, props);
 
+        const flightOrderTable = Table.fromTableName(this, 'FlightOrderTable', props.flightOrderTableName);
+
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
             runtime: Runtime.NODEJS_18_X,
             entry: path.join(__dirname, "../../service/src/index.ts"),
@@ -34,6 +37,9 @@ export default class ServiceStack extends Stack {
             },
             logRetention: RetentionDays.FIVE_DAYS
         });
+
+        flightOrderTable.grantReadWriteData(serviceLambda);
+        
 
         this.apiGateway = new RestApi(this, 'MyApi', {
             restApiName: 'ServiceApi',
