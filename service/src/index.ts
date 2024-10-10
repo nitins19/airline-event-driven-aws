@@ -11,7 +11,7 @@ const TABLE_NAME = process.env.TABLE_NAME;
 export const handler = async (event: any) => {
 
     try {
-        const body = JSON.parse(event);
+        const body = JSON.parse(event.body);
 
         console.log("flight data", body);
 
