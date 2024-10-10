@@ -25,9 +25,9 @@ export const handler = async (event: any) => {
             passengerId: body.passengerId,
             passengerName: body.passengerName,
             email: body.email,
-            flightDetails: body?.flightDetails || {},
+            flightDetails: body.flightDetails || {},
             totalAmount: body.totalAmount,
-            notificationChannel: body?.notificationChannel || "EMAIL",
+            notificationChannel: "EMAIL",
             paymentStatus: "Succeeded",
             createdAt: new Date().toISOString(),
         };
@@ -49,7 +49,7 @@ export const handler = async (event: any) => {
             }),
         };
     } catch (error) {
-        console.error("Error creating order:", error);
+        console.error("Error creating order:", JSON.stringify(error, null, 2));
         return {
             statusCode: 500,
             body: JSON.stringify({ message: "Internal server erro" }),
