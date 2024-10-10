@@ -1,10 +1,10 @@
 import { Duration, Stack, StackProps } from "aws-cdk-lib";
-import { AuthorizationType, LambdaIntegration, MethodLoggingLevel, RestApi, TokenAuthorizer } from "aws-cdk-lib/aws-apigateway";
+import { AuthorizationType, LambdaIntegration, LogGroupLogDestination, MethodLoggingLevel, RestApi, TokenAuthorizer } from "aws-cdk-lib/aws-apigateway";
 import { Table } from "aws-cdk-lib/aws-dynamodb";
 // import { Table } from "aws-cdk-lib/aws-dynamodb";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
-import { RetentionDays } from "aws-cdk-lib/aws-logs";
+import { LogGroup, RetentionDays } from "aws-cdk-lib/aws-logs";
 import { Queue } from "aws-cdk-lib/aws-sqs";
 import { Construct } from "constructs";
 import path from "path";
@@ -39,12 +39,15 @@ export default class ServiceStack extends Stack {
         });
 
         flightOrderTable.grantReadWriteData(serviceLambda);
+
+        const logGroup = new LogGroup(this, 'APIGatewayAccessLogs',{});
         
 
         this.apiGateway = new RestApi(this, 'MyApi', {
             restApiName: 'ServiceApi',
             deployOptions: {
                 loggingLevel: MethodLoggingLevel.INFO,
+                accessLogDestination: new LogGroupLogDestination(logGroup),
                 stageName: 'dev'
             }
         });
