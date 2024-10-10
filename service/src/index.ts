@@ -10,6 +10,7 @@ const TABLE_NAME = process.env.TABLE_NAME;
 
 export const handler = async (event: any) => {
     console.log("HTTP Method: ", JSON.stringify(event, null, 2));
+    console.log('lets see', event.body)
 
     console.log('tableee name', TABLE_NAME);
     try {
