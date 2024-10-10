@@ -9,9 +9,9 @@ const dynamoDb = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = process.env.TABLE_NAME;
 
 export const handler = async (event: any) => {
-    
+
     try {
-        const body = event;
+        const body = JSON.parse(event);
 
         console.log("flight data", body);
 
