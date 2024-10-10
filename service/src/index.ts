@@ -45,7 +45,7 @@ export const handler = async (event: any) => {
         console.log('done');
         // Return success response
         return {
-            statusCode: 201,
+            statusCode: 200,
             body: JSON.stringify({
                 message: "Order created successfully",
                 orderId: orderId,
