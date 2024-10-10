@@ -73,7 +73,7 @@ export default class ServiceStack extends Stack {
         // Add a proxy resource and secure it with the OAuth authorizer
         const proxy = this.apiGateway.root.addProxy({
             anyMethod: true,
-            defaultIntegration: new LambdaIntegration(serviceLambda),
+            defaultIntegration: new LambdaIntegration(serviceLambda)
             // defaultMethodOptions: {
             //     authorizer: OAuthAuthorizer,
             //     authorizationType: AuthorizationType.CUSTOM
