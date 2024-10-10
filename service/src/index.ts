@@ -15,7 +15,7 @@ export const handler = async (event: any) => {
 
     console.log('tableee name', TABLE_NAME);
     try {
-        const body = JSON.parse(event.body);
+        const body = event;
 
         console.log("flight data", body);
 
@@ -44,13 +44,13 @@ export const handler = async (event: any) => {
         );
         console.log('done');
         // Return success response
-        return {
+        return ({
             statusCode: 200,
             body: JSON.stringify({
                 message: "Order created successfully",
-                orderId: orderId,
+                orderId: orderId
             }),
-        };
+        });
     } catch (error) {
         console.error("Error creating order:", error, error.message);
         return {
