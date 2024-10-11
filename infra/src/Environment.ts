@@ -14,7 +14,8 @@ export default class Environment extends Stage {
       const flightOrdersTableStack = new FlightOrdersTable(this, 'FlightOrdersTable', {});
 
       const serviceStack = new ServiceStack(this, 'ServiceStack', {
-        flightOrderTableName: flightOrdersTableStack.flightEventsTable.tableName
+        flightOrderTableName: flightOrdersTableStack.flightEventsTable.tableName,
+        tableStreamARN: flightOrdersTableStack.flightEventsTable.tableStreamArn
       });
 
       stacks.push(flightOrdersTableStack);

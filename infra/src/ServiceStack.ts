@@ -12,6 +12,7 @@ import FlightEvents from "./FlightEvents";
 
 interface ServiceStackProps extends StackProps {
     readonly flightOrderTableName: string
+    readonly tableStreamARN: string
 }
 
 export default class ServiceStack extends Stack {
@@ -23,7 +24,8 @@ export default class ServiceStack extends Stack {
 
         const flightOrderTable = Table.fromTableAttributes(this, 'FlightOrderTable',
             {
-                tableName: props.flightOrderTableName
+                tableName: props.flightOrderTableName,
+                tableStreamArn: props.tableStreamARN
             });
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
