@@ -63,22 +63,21 @@ export default class FlightEvents extends Construct {
                     detailType: 'FlightOrderCreated',
                     source: 'flight/order',
                 },
-                inputTemplate:
-                    `{
+                inputTemplate: `{
                       "details": {
-                        "data":{
-                          "passengerId": <$.dynamodb.NewImage.passengerId.S>,
-                          "passengerName": <$.dynamodb.NewImage.passengerName.S>,
-                          "email": <$.dynamodb.NewImage.email.S>,
+                        "data": {
+                          "passengerId": "<$.dynamodb.NewImage.passengerId.S>",
+                          "passengerName": "<$.dynamodb.NewImage.passengerName.S>",
+                          "email": "<$.dynamodb.NewImage.email.S>",
                           "flightDetails": {
-                            "Flight": <$.dynamodb.NewImage.flightDetails.M.Flight.S>,
-                            "PNR": <$.dynamodb.NewImage.flightDetails.M.PNR.S>,
-                            "FROM": <$.dynamodb.NewImage.flightDetails.M.FROM.S>,
-                            "TO": <$.dynamodb.NewImage.flightDetails.M.TO.S>,
-                            "Departure Time": <$.dynamodb.NewImage.flightDetails.M.Departure Time.S>
+                            "Flight": "<$.dynamodb.NewImage.flightDetails.M.Flight.S>",
+                            "PNR": "<$.dynamodb.NewImage.flightDetails.M.PNR.S>",
+                            "FROM": "<$.dynamodb.NewImage.flightDetails.M.FROM.S>",
+                            "TO": "<$.dynamodb.NewImage.flightDetails.M.TO.S>",
+                            "Departure Time": "<$.dynamodb.NewImage.flightDetails.M.Departure Time.S>"
                                          },
-                          "addOns": <$.dynamodb.NewImage.addOns.L>,
-                          "totalAmount": <$.dynamodb.NewImage.totalAmount.N>
+                          "addOns": "<$.dynamodb.NewImage.addOns.L>",
+                          "totalAmount": "<$.dynamodb.NewImage.totalAmount.N>"
                             }
                         }
                     }`
