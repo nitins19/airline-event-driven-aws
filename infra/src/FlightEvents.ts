@@ -71,7 +71,6 @@ export default class FlightEvents extends Construct {
                     source: 'flight/order',
                 },
                 inputTemplate: `{
-                      "details": {
                         "data": {
                           "passengerId": "<$.dynamodb.NewImage.passengerId.S>",
                           "passengerName": "<$.dynamodb.NewImage.passengerName.S>",
@@ -83,9 +82,9 @@ export default class FlightEvents extends Construct {
                             "TO": "<$.dynamodb.NewImage.flightDetails.M.TO.S>",
                             "Departure Time": "<$.dynamodb.NewImage.flightDetails.M.Departure_Time.S>"
                                          },
+                          "addOns": "<$.dynamodb.NewImage.addOns.L>",
                           "totalAmount": "<$.dynamodb.NewImage.totalAmount.N>"
                             }
-                        }
                     }`
             }
         });
