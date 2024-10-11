@@ -21,7 +21,10 @@ export default class ServiceStack extends Stack {
     constructor(scope: Construct, id: string, props: ServiceStackProps) {
         super(scope, id, props);
 
-        const flightOrderTable = Table.fromTableName(this, 'FlightOrderTable', props.flightOrderTableName);
+        const flightOrderTable = Table.fromTableAttributes(this, 'FlightOrderTable',
+            {
+                tableName: props.flightOrderTableName
+            });
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
             runtime: Runtime.NODEJS_18_X,
@@ -41,8 +44,8 @@ export default class ServiceStack extends Stack {
 
         flightOrderTable.grantReadWriteData(serviceLambda);
 
-        const logGroup = new LogGroup(this, 'APIGatewayAccessLogs',{});
-        
+        const logGroup = new LogGroup(this, 'APIGatewayAccessLogs', {});
+
 
         this.apiGateway = new RestApi(this, 'MyApi', {
             restApiName: 'ServiceApi',

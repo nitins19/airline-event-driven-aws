@@ -1,5 +1,5 @@
 import { RemovalPolicy } from "aws-cdk-lib";
-import { ITable, Table } from "aws-cdk-lib/aws-dynamodb";
+import { ITable } from "aws-cdk-lib/aws-dynamodb";
 import { EventBus, Rule } from "aws-cdk-lib/aws-events";
 import { CloudWatchLogGroup } from "aws-cdk-lib/aws-events-targets";
 import { Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
@@ -8,7 +8,7 @@ import { CfnPipe } from "aws-cdk-lib/aws-pipes";
 import { Construct } from "constructs";
 
 interface FlightEventsProps {
-    flightOrderTable: Table
+    flightOrderTable: ITable
 }
 
 export default class FlightEvents extends Construct {
