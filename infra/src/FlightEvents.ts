@@ -1,4 +1,4 @@
-import { RemovalPolicy, StackProps } from "aws-cdk-lib";
+import { RemovalPolicy } from "aws-cdk-lib";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
 import { EventBus, Rule } from "aws-cdk-lib/aws-events";
 import { CloudWatchLogGroup } from "aws-cdk-lib/aws-events-targets";
@@ -7,7 +7,7 @@ import { LogGroup, RetentionDays } from "aws-cdk-lib/aws-logs";
 import { CfnPipe } from "aws-cdk-lib/aws-pipes";
 import { Construct } from "constructs";
 
-interface FlightEventsProps extends StackProps {
+interface FlightEventsProps {
     flightOrderTable: ITable
 }
 
