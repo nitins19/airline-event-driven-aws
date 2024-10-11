@@ -19,7 +19,7 @@ export default class FlightEvents extends Construct {
             eventBusName: "FlightOrderEventsBus",
         });
 
-        const eventBusLogGroup = new LogGroup(this, "EventBusRule", {
+        const eventBusLogGroup = new LogGroup(this, "EventBusLogGroup", {
             retention: RetentionDays.ONE_DAY,
             removalPolicy: RemovalPolicy.DESTROY,
         });
@@ -38,8 +38,14 @@ export default class FlightEvents extends Construct {
             assumedBy: new ServicePrincipal("pipes.amazonaws.com"),
         });
 
+        const pipeLogGroup = new LogGroup(this, "EventBridgePipeLogGroup", {
+            retention: RetentionDays.ONE_DAY,
+            removalPolicy: RemovalPolicy.DESTROY,
+          });
+
         eventBus.grantPutEventsTo(pipeRole);
         props.flightOrderTable.grantStreamRead(pipeRole);
+        pipeLogGroup.grantWrite(pipeRole);
 
         const pipe = new CfnPipe(this, 'DynamoDBtoEventBusPipe', {
             name: 'EventOrderPipe',
