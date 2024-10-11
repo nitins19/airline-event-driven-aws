@@ -46,8 +46,9 @@ export default class ServiceStack extends Stack {
 
         flightOrderTable.grantReadWriteData(serviceLambda);
 
+        
+        
         const logGroup = new LogGroup(this, 'APIGatewayAccessLogs', {});
-
 
         this.apiGateway = new RestApi(this, 'MyApi', {
             restApiName: 'ServiceApi',
@@ -90,8 +91,26 @@ export default class ServiceStack extends Stack {
             // }
         });
 
+        const enrichmentLambda = new NodejsFunction(this, 'EnrichmentLambda', {
+            runtime: Runtime.NODEJS_18_X,
+            entry: path.join(__dirname, "../../service/src/index.ts"),
+            handler: "handler",
+            timeout: Duration.seconds(10),
+            memorySize: 250,
+            bundling: {
+                sourceMap: true,
+                minify: true
+            },
+            environment: {
+                TABLE_NAME: props.flightOrderTableName
+            },
+            logRetention: RetentionDays.FIVE_DAYS
+        });
+        
+
         new FlightEvents(this, 'FlightEvents', {
             flightOrderTable,
+            enrichmentLambda
         });
 
         // Create a Dead Letter Queue
