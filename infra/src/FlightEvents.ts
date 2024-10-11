@@ -3,13 +3,11 @@ import { ITable } from "aws-cdk-lib/aws-dynamodb";
 import { EventBus, Rule } from "aws-cdk-lib/aws-events";
 import { CloudWatchLogGroup } from "aws-cdk-lib/aws-events-targets";
 import { Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
-import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { LogGroup, RetentionDays } from "aws-cdk-lib/aws-logs";
 import { CfnPipe } from "aws-cdk-lib/aws-pipes";
 import { Construct } from "constructs";
 
 interface FlightEventsProps extends StackProps {
-    serviceLambda: NodejsFunction,
     flightOrderTable: ITable
 }
 

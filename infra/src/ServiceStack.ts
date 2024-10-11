@@ -85,8 +85,7 @@ export default class ServiceStack extends Stack {
             // }
         });
 
-        const flightEvents = new FlightEvents(this, 'FlightEvents', {
-            serviceLambda,
+        new FlightEvents(this, 'FlightEvents', {
             flightOrderTable,
         });
 
