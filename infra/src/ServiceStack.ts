@@ -8,6 +8,7 @@ import { LogGroup, RetentionDays } from "aws-cdk-lib/aws-logs";
 import { Queue } from "aws-cdk-lib/aws-sqs";
 import { Construct } from "constructs";
 import path from "path";
+import FlightEvents from "./FlightEvents";
 
 interface ServiceStackProps extends StackProps {
     readonly flightOrderTableName: string
@@ -82,6 +83,11 @@ export default class ServiceStack extends Stack {
             //     authorizer: OAuthAuthorizer,
             //     authorizationType: AuthorizationType.CUSTOM
             // }
+        });
+
+        const flightEvents = new FlightEvents(this, 'FlightEvents', {
+            serviceLambda,
+            flightOrderTable,
         });
 
         // Create a Dead Letter Queue
