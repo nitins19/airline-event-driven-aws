@@ -1,7 +1,7 @@
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 
 
-exports.handler = async (event: any) => {
+export const handler = async (event: any) => {
 
     const enrichedEvents = event.map((record) => {
         const newItem = unmarshall(record.dynamodb.NewImage);
