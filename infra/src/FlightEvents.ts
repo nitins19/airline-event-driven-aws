@@ -31,7 +31,7 @@ export default class FlightEvents extends Construct {
             ruleName: "AllEventsRule",
             description: 'Capture all events for debugging purpose',
             eventPattern: {
-                source: ['flight/order'] 
+                source: ['flight/orders'] 
             },
             targets: [new CloudWatchLogGroup(eventBusLogGroup)],
         });
