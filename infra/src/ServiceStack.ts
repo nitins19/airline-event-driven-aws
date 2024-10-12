@@ -9,10 +9,17 @@ import { Queue } from "aws-cdk-lib/aws-sqs";
 import { Construct } from "constructs";
 import path from "path";
 import FlightEvents from "./FlightEvents";
+import { DefinitionBody, Pass, Result, StateMachine, TaskInput } from "aws-cdk-lib/aws-stepfunctions";
+import * as tasks from "aws-cdk-lib/aws-stepfunctions-tasks";
+import { EventBus, Rule, RuleTargetInput } from "aws-cdk-lib/aws-events";
+import { SfnStateMachine } from "aws-cdk-lib/aws-events-targets";
+import { LambdaInvoke } from "aws-cdk-lib/aws-stepfunctions-tasks";
+import { Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 
 interface ServiceStackProps extends StackProps {
-    readonly flightOrderTableName: string
-    readonly tableStreamARN: string
+    readonly flightOrderTableName: string;
+    readonly tableStreamARN: string;
+    readonly eventBusName: string;
 }
 
 export default class ServiceStack extends Stack {
@@ -46,8 +53,8 @@ export default class ServiceStack extends Stack {
 
         flightOrderTable.grantReadWriteData(serviceLambda);
 
-        
-        
+
+
         const logGroup = new LogGroup(this, 'APIGatewayAccessLogs', {});
 
         this.apiGateway = new RestApi(this, 'MyApi', {
@@ -103,12 +110,74 @@ export default class ServiceStack extends Stack {
             },
             logRetention: RetentionDays.FIVE_DAYS
         });
-        
+
 
         new FlightEvents(this, 'FlightEvents', {
             flightOrderTable,
             enrichmentLambda
         });
+
+        // ------------------ Step Function Logic ------------------
+
+        const eventBus = EventBus.fromEventBusName(this, 'EventBus', props.eventBusName);
+
+        const passState = new Pass(this, "PassState", {
+            result: Result.fromObject({
+                message: "Order processing initiated",
+            }),
+            resultPath: "$.passStateResult",
+        });
+
+        const processOrderLambda = new NodejsFunction(this, "ProcessOrderLambda", {
+            runtime: Runtime.NODEJS_18_X,
+            handler: "index.handler",
+            entry: path.join(__dirname, "../../service/src/lambda/process-order.ts"),
+            bundling: {
+                minify: true,
+                sourceMap: true,
+            },
+            environment: {
+                EVENT_BUS_NAME: eventBus.eventBusName
+            },
+        });
+
+        const processOrderTask = new LambdaInvoke(this, "ProcessOrderStep", {
+            lambdaFunction: processOrderLambda,
+            payload: TaskInput.fromJsonPathAt("$"),
+            resultPath: "$.processOrderResult",
+        });
+
+        // State Machine
+        const definition = passState.next(processOrderTask);
+
+        const orderProcessingWorkflow = new StateMachine(this, "OrderProcessingWorkflow", {
+            stateMachineName: 'OrderProcessingStateMachine',
+            definitionBody: DefinitionBody.fromChainable(definition),
+            timeout: Duration.minutes(5),
+            tracingEnabled: true,
+        });
+
+        const eventBridgeRole = new Role(this, "EventBridgeRole", {
+            assumedBy: new ServicePrincipal("events.amazonaws.com"),
+        });
+
+        orderProcessingWorkflow.grantStartExecution(eventBridgeRole);
+
+        // Sending flight order events to state machine workflow for processing
+        new Rule(this, "OrderCreatedRule", {
+            eventBus: eventBus,
+            eventPattern: {
+                source: ["flight/orders"],
+                detailType: ["Flight-Order-Created"],
+            },
+            targets: [
+                new SfnStateMachine(orderProcessingWorkflow, {
+                    role: eventBridgeRole,
+                    input: RuleTargetInput.fromEventPath("$.detail")
+                }),
+            ],
+        });
+
 
         // Create a Dead Letter Queue
         // const deadLetterQueue = new Queue(this, 'DLQ', {
