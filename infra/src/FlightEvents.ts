@@ -64,7 +64,7 @@ export default class FlightEvents extends Construct {
             },
             targetParameters: {
                 eventBridgeEventBusParameters: {
-                    detailType: 'FlightOrderCreated',
+                    detailType: 'Flight-Order-Created',
                     source: 'flight/orders',
                 },
                 
