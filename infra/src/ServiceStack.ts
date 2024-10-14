@@ -184,6 +184,7 @@ export default class ServiceStack extends Stack {
             runtime: Runtime.NODEJS_18_X,
             entry: path.join(__dirname, "../../service/src/lambda/order-notification.ts"),
             handler: "handler",
+            role:lambdaRole,
             bundling: {
                 externalModules: ['aws-sdk'],
                 nodeModules:['aws-sdk'],
@@ -191,18 +192,7 @@ export default class ServiceStack extends Stack {
                 sourceMap: true,
             }
         });
-        const lambdaRole = new Role(this, 'LambdaExecutionRole', {
-            assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
-            description: 'Role that allows lambda to send emails via SES'
-        });
-        
-        // Adding SES permissions to the role
-        lambdaRole.addToPolicy(new PolicyStatement({
-            actions: ['ses:SendEmail', 'ses:SendRawEmail'],
-            resources: [
-                `arn:aws:ses:us-east-1:954976306395:identity/nitinsaxena913@gmail.com`
-            ],
-        }));
+
         new Rule(this, "OrderCompletedRule", {
             eventBus: eventBus,
             ruleName: "OrderCompletedRule",
