@@ -208,6 +208,18 @@ export default class ServiceStack extends Stack {
             logRetention: RetentionDays.FIVE_DAYS
         });
 
+        lambdaRole.addToPolicy(new PolicyStatement({
+            actions: [
+                'logs:CreateLogGroup',
+                'logs:CreateLogStream',
+                'logs:PutLogEvents'
+            ],
+            resources: [
+                // This scope can be broadened to all log groups under this account if needed
+                `arn:aws:logs:us-east-1:954976306395:log-group:/aws/lambda/*:log-stream:*`
+            ]
+        }));
+
         new Rule(this, "OrderCompletedRule", {
             eventBus: eventBus,
             ruleName: "OrderCompletedRule",
