@@ -19,6 +19,7 @@ export const handler = async (event: any) => {
             addOns: newItem.addOns,
             flightDetails: newItem.flightDetails,
             notificationChannel: newItem.notificationChannel,
+            totalAmount: newItem.totalAmount,
             createdAt: newItem.createdAt
         };
     });
