@@ -183,6 +183,7 @@ export default class ServiceStack extends Stack {
             entry: path.join(__dirname, "../../service/src/lambda/order-notification.ts"),
             handler: "handler",
             bundling: {
+                externalModules: ['aws-sdk'],
                 minify: true,
                 sourceMap: true,
             }
@@ -200,7 +201,7 @@ export default class ServiceStack extends Stack {
                 event: RuleTargetInput.fromEventPath('$.detail')
             })],
         });
-        
+
         orderNotificationLambda.addPermission('InvokeByEventBus', {
             principal: new ServicePrincipal('events.amazonaws.com'),
             sourceArn: eventBus.eventBusArn
