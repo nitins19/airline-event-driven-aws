@@ -1,4 +1,3 @@
-// import { SES } from 'aws-sdk';
 import * as AWS from 'aws-sdk';
 
 const ses = new AWS.SES({ region: 'us-east-1' });
