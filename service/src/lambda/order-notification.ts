@@ -5,7 +5,25 @@ const ses = new SES({ region: 'us-east-1' });
 export const handler = async (event: any) => {
     const orderDetails = event;
 
-    // Email parameters
+    console.log('orderDetailss', orderDetails);
+
+    const messageBody = `Dear ${event.passengerName},
+
+Your flight ticket booking is confirmed.
+Flight: ${event.flightDetails.Flight}
+PNR: ${event.flightDetails.PNR}
+From: ${event.flightDetails.FROM}
+To: ${event.flightDetails.TO}
+Departure Time: ${event.flightDetails.Departure_Time}
+
+Add-ons included: ${event.addOns.join(', ')}
+Total Amount Paid: ₹${event.totalAmount}
+
+Thank you for choosing our airline!
+
+Best regards,
+Your Airline Team`;
+
     const params = {
         Source: 'nitinsaxena913@gmail.com', // Verified SES email address
         Destination: {
@@ -13,12 +31,11 @@ export const handler = async (event: any) => {
         },
         Message: {
             Subject: {
-                Data: 'Ticket Booked'
+                Data: 'Ticket Booking Confirmation'
             },
             Body: {
                 Text: {
-                    Data: `Your ticket from ${orderDetails.flightDetails.FROM} to ${orderDetails.flightDetails.TO} has been booked.
-                           Thank you for flying with our Airline.`
+                    Data: messageBody
                 }
             }
         }
