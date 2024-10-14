@@ -186,7 +186,7 @@ export default class ServiceStack extends Stack {
             handler: "handler",
             bundling: {
                 externalModules: ['aws-sdk'],
-                nodeModules:[],
+                nodeModules:['aws-sdk'],
                 minify: true,
                 sourceMap: true,
             }
