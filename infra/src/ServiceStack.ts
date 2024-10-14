@@ -141,6 +141,8 @@ export default class ServiceStack extends Stack {
             },
         });
 
+        eventBus.grantPutEventsTo(processOrderLambda);
+
         const processOrderTask = new LambdaInvoke(this, "ProcessOrderStep", {
             lambdaFunction: processOrderLambda,
             payload: TaskInput.fromJsonPathAt("$"),
