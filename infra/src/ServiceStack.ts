@@ -204,7 +204,8 @@ export default class ServiceStack extends Stack {
                 nodeModules:['aws-sdk'],
                 minify: true,
                 sourceMap: true,
-            }
+            },
+            logRetention: RetentionDays.FIVE_DAYS
         });
 
         new Rule(this, "OrderCompletedRule", {
