@@ -14,7 +14,7 @@ import * as tasks from "aws-cdk-lib/aws-stepfunctions-tasks";
 import { EventBus, Rule, RuleTargetInput } from "aws-cdk-lib/aws-events";
 import { LambdaFunction, SfnStateMachine } from "aws-cdk-lib/aws-events-targets";
 import { LambdaInvoke } from "aws-cdk-lib/aws-stepfunctions-tasks";
-import { Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
+import { PolicyStatement, Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 
 interface ServiceStackProps extends StackProps {
     readonly flightOrderTableName: string;
@@ -191,7 +191,18 @@ export default class ServiceStack extends Stack {
                 sourceMap: true,
             }
         });
-
+        const lambdaRole = new Role(this, 'LambdaExecutionRole', {
+            assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
+            description: 'Role that allows lambda to send emails via SES'
+        });
+        
+        // Adding SES permissions to the role
+        lambdaRole.addToPolicy(new PolicyStatement({
+            actions: ['ses:SendEmail', 'ses:SendRawEmail'],
+            resources: [
+                `arn:aws:ses:us-east-1:954976306395:identity/nitinsaxena913@gmail.com`
+            ],
+        }));
         new Rule(this, "OrderCompletedRule", {
             eventBus: eventBus,
             ruleName: "OrderCompletedRule",
