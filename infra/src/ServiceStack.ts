@@ -12,7 +12,7 @@ import FlightEvents from "./FlightEvents";
 import { DefinitionBody, Pass, Result, StateMachine, TaskInput } from "aws-cdk-lib/aws-stepfunctions";
 import * as tasks from "aws-cdk-lib/aws-stepfunctions-tasks";
 import { EventBus, Rule, RuleTargetInput } from "aws-cdk-lib/aws-events";
-import { SfnStateMachine } from "aws-cdk-lib/aws-events-targets";
+import { LambdaFunction, SfnStateMachine } from "aws-cdk-lib/aws-events-targets";
 import { LambdaInvoke } from "aws-cdk-lib/aws-stepfunctions-tasks";
 import { Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 
@@ -130,8 +130,8 @@ export default class ServiceStack extends Stack {
 
         const processOrderLambda = new NodejsFunction(this, "ProcessOrderLambda", {
             runtime: Runtime.NODEJS_18_X,
-            handler: "index.handler",
             entry: path.join(__dirname, "../../service/src/lambda/process-order.ts"),
+            handler: "handler",
             bundling: {
                 minify: true,
                 sourceMap: true,
@@ -177,6 +177,36 @@ export default class ServiceStack extends Stack {
                 }),
             ],
         });
+
+        const orderNotificationLambda = new NodejsFunction(this, "OrderNotificationLambda", {
+            runtime: Runtime.NODEJS_18_X,
+            entry: path.join(__dirname, "../../service/src/lambda/order-notification.ts"),
+            handler: "handler",
+            bundling: {
+                minify: true,
+                sourceMap: true,
+            }
+        });
+
+        new Rule(this, "OrderCompletedRule", {
+            eventBus: eventBus,
+            ruleName: "OrderCompletedRule",
+            description: 'Send order complete event to passenger email',
+            eventPattern: {
+                source: ['flight/orders'],
+                detailType: ['flight-order-complete'] 
+            },
+            targets: [new LambdaFunction(orderNotificationLambda, {
+                event: RuleTargetInput.fromEventPath('$.detail')
+            })],
+        });
+        
+        orderNotificationLambda.addPermission('InvokeByEventBus', {
+            principal: new ServicePrincipal('events.amazonaws.com'),
+            sourceArn: eventBus.eventBusArn
+        });
+
+
 
 
         // Create a Dead Letter Queue
