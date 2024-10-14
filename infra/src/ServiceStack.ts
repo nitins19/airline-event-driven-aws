@@ -185,7 +185,6 @@ export default class ServiceStack extends Stack {
             entry: path.join(__dirname, "../../service/src/lambda/order-notification.ts"),
             handler: "handler",
             bundling: {
-                externalModules: ['aws-sdk'],
                 minify: true,
                 sourceMap: true,
             }

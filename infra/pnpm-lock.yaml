@@ -15,7 +15,7 @@ importers:
         specifier: 2.160.0
         version: 2.160.0(constructs@10.3.0)
       aws-sdk:
-        specifier: ^2.1485.0
+        specifier: ^2.1691.0
         version: 2.1691.0
       constructs:
         specifier: ^10.3.0
