@@ -6,7 +6,7 @@ import ServiceStack from './ServiceStack';
 export interface EnvironmentProps extends StageProps { }
 
 const US_EAST_1 = 'us-east-1';
-const US_WEST_2 = 'us-west-2';
+// const US_WEST_2 = 'us-west-2';
 
 export default class Environment extends Stage {
   constructor(scope: Construct, id: string, props: EnvironmentProps) {
@@ -15,7 +15,7 @@ export default class Environment extends Stage {
     if (props.env?.account && props.env?.region) {
       const stacks = [];
       const replicationRegions = [US_EAST_1];
-      replicationRegions.push(US_WEST_2);
+      // replicationRegions.push(US_WEST_2);
       const flightOrdersTableStack = new FlightOrdersTable(this, 'FlightOrdersTable', {
         replicationRegions
       });
