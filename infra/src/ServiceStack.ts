@@ -18,7 +18,7 @@ import { PolicyStatement, Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 
 interface ServiceStackProps extends StackProps {
     readonly flightOrderTableName: string;
-    readonly tableStreamARN: string;
+    // readonly tableName: string;
     readonly eventBusName: string;
 }
 
@@ -32,7 +32,8 @@ export default class ServiceStack extends Stack {
         const flightOrderTable = Table.fromTableAttributes(this, 'FlightOrderTable',
             {
                 tableName: props.flightOrderTableName,
-                tableStreamArn: props.tableStreamARN
+                // tableName: props.tableName
+                // tableStreamArn: props.tableStreamARN
             });
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {

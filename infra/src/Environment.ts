@@ -5,17 +5,24 @@ import ServiceStack from './ServiceStack';
 
 export interface EnvironmentProps extends StageProps { }
 
+const US_EAST_1 = 'us-east-1';
+const US_WEST_2 = 'us-east-1';
+
 export default class Environment extends Stage {
   constructor(scope: Construct, id: string, props: EnvironmentProps) {
     super(scope, id, props);
 
     if (props.env?.account && props.env?.region) {
       const stacks = [];
-      const flightOrdersTableStack = new FlightOrdersTable(this, 'FlightOrdersTable', {});
+      const replicationRegions = [US_EAST_1];
+      replicationRegions.push(US_WEST_2);
+      const flightOrdersTableStack = new FlightOrdersTable(this, 'FlightOrdersTable', {
+        replicationRegions
+      });
 
       const serviceStack = new ServiceStack(this, 'ServiceStack', {
         flightOrderTableName: flightOrdersTableStack.flightEventsTable.tableName,
-        tableStreamARN: flightOrdersTableStack.flightEventsTable.tableStreamArn,
+        // tableStreamARN: flightOrdersTableStack.flightEventsTable.tableName,
         eventBusName: 'FlightOrderEventsBus'
       });
 

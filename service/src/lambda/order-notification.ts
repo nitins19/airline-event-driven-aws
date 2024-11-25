@@ -6,8 +6,6 @@ const ses = new SES({ region: 'us-east-1' });
 export const handler = async (event: any) => {
     const orderDetails = event;
 
-    console.log('orderDetailss', orderDetails);
-
     const messageBody = `Dear ${event.passengerName},
 
 Your flight ticket booking is confirmed.
@@ -45,7 +43,6 @@ Your Airline Team`;
     try {
         const data = await ses.sendEmail(params).promise();
         console.log("Email sent:", data);
-        return data;
     } catch (error) {
         console.error("Failed to send email:", error);
         throw error;
