@@ -240,8 +240,6 @@ export default class ServiceStack extends Stack {
         });
 
 
-
-
         // Create a Dead Letter Queue
         // const deadLetterQueue = new Queue(this, 'DLQ', {
         //     retentionPeriod: Duration.days(5) // Messages stay in the DLQ for 5 days
