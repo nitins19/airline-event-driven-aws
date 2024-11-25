@@ -20,11 +20,11 @@ export default class Environment extends Stage {
         replicationRegions
       });
 
-      // const serviceStack = new ServiceStack(this, 'ServiceStack', {
-      //   flightOrderTableName: flightOrdersTableStack.flightEventsTable.tableName,
-      //   tableStreamARN: flightOrdersTableStack.flightEventsTable.attrStreamArn,
-      //   eventBusName: 'FlightOrderEventsBus'
-      // });
+      const serviceStack = new ServiceStack(this, 'ServiceStack', {
+        flightOrderTableName: flightOrdersTableStack.flightEventsTable.tableName,
+        tableStreamARN: flightOrdersTableStack.flightEventsTable.attrStreamArn,
+        eventBusName: 'FlightOrderEventsBus'
+      });
 
       stacks.push(flightOrdersTableStack);
       // stacks.push(serviceStack);
