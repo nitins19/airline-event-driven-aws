@@ -20,18 +20,6 @@ export default class Environment extends Stage {
         replicationRegions
       });
 
-      console.log("Resolved Table Name:", flightOrdersTableStack.flightEventsTable.tableName);
-console.log("Resolved Stream ARN:", flightOrdersTableStack.flightEventsTable.attrStreamArn);
-
-      if (!flightOrdersTableStack.flightEventsTable.tableName ) {
-        throw new Error("Table name  is undefined");
-      }
-
-      
-      if (!flightOrdersTableStack.flightEventsTable.attrStreamArn) {
-        throw new Error("Table stream ARN is undefined");
-      }
-
       const serviceStack = new ServiceStack(this, 'ServiceStack', {
         flightOrderTableName: flightOrdersTableStack.flightEventsTable.tableName,
         tableStreamARN: flightOrdersTableStack.flightEventsTable.attrStreamArn,

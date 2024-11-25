@@ -27,6 +27,7 @@ export default class FlightOrdersTable extends Stack {
         { attributeName: 'passengerId', attributeType: AttributeType.STRING }
       ],
       replicas: flighteventReplicas,
+      tableName: 'FlightOrderTable',
       streamSpecification: { streamViewType: StreamViewType.NEW_AND_OLD_IMAGES },
       billingMode: BillingMode.PAY_PER_REQUEST,
     });
