@@ -27,7 +27,7 @@ export default class Environment extends Stage {
       });
 
       stacks.push(flightOrdersTableStack);
-      // stacks.push(serviceStack);
+      stacks.push(serviceStack);
     } else {
       throw new Error('Expected account and region to be defined in props.env');
     }
