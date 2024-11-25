@@ -18,7 +18,7 @@ import { PolicyStatement, Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 
 interface ServiceStackProps extends StackProps {
     readonly flightOrderTableName: string;
-    // readonly tableName: string;
+    readonly tableStreamARN: string;
     readonly eventBusName: string;
 }
 
@@ -32,8 +32,7 @@ export default class ServiceStack extends Stack {
         const flightOrderTable = Table.fromTableAttributes(this, 'FlightOrderTable',
             {
                 tableName: props.flightOrderTableName,
-                // tableName: props.tableName
-                // tableStreamArn: props.tableStreamARN
+                tableStreamArn: props.tableStreamARN
             });
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
@@ -238,6 +237,8 @@ export default class ServiceStack extends Stack {
             principal: new ServicePrincipal('events.amazonaws.com'),
             sourceArn: eventBus.eventBusArn
         });
+
+
 
 
         // Create a Dead Letter Queue
