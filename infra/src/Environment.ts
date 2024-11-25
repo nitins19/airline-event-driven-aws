@@ -20,6 +20,9 @@ export default class Environment extends Stage {
         replicationRegions
       });
 
+      console.log("Resolved Table Name:", flightOrdersTableStack.flightEventsTable.tableName);
+console.log("Resolved Stream ARN:", flightOrdersTableStack.flightEventsTable.attrStreamArn);
+
       if (!flightOrdersTableStack.flightEventsTable.tableName ) {
         throw new Error("Table name  is undefined");
       }
