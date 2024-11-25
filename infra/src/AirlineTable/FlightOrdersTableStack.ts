@@ -1,6 +1,6 @@
 import { StackProps, Stack, RemovalPolicy } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { AttributeType, Table, BillingMode, StreamViewType, CfnGlobalTable } from 'aws-cdk-lib/aws-dynamodb';
+import { AttributeType, BillingMode, StreamViewType, CfnGlobalTable } from 'aws-cdk-lib/aws-dynamodb';
 
 export interface FlightOrdersTableProps extends StackProps {
   readonly replicationRegions: string[];

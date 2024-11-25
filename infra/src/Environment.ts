@@ -6,7 +6,7 @@ import ServiceStack from './ServiceStack';
 export interface EnvironmentProps extends StageProps { }
 
 const US_EAST_1 = 'us-east-1';
-const US_WEST_2 = 'us-east-1';
+const US_WEST_2 = 'us-west-2';
 
 export default class Environment extends Stage {
   constructor(scope: Construct, id: string, props: EnvironmentProps) {
