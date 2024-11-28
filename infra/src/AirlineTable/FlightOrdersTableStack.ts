@@ -35,7 +35,7 @@ export default class FlightOrdersTable extends Stack {
 
     this.flightEventsTable.applyRemovalPolicy(RemovalPolicy.DESTROY);
 
-    this.flightEventsTableRestored = new CfnGlobalTable(this, 'FlightOrderEvents', {
+    this.flightEventsTableRestored = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
       keySchema: [
         { attributeName: 'passengerId', keyType: 'HASH' }
       ],
