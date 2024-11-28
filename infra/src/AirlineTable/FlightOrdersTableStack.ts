@@ -32,10 +32,9 @@ export default class FlightOrdersTable extends Stack {
       billingMode: BillingMode.PAY_PER_REQUEST,
     });
 
-    this.exportValue(flightEventsTableOld.tableName);
-    
-
     flightEventsTableOld.applyRemovalPolicy(RemovalPolicy.DESTROY);
+
+    this.exportValue(this.flightEventsTable.attrArn);
 
     this.flightEventsTable = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
       keySchema: [
