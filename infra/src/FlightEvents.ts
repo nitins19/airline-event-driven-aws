@@ -45,7 +45,7 @@ export default class FlightEvents extends Construct {
         props.enrichmentLambda.grantInvoke(pipeRole);
 
         const pipe = new CfnPipe(this, 'DynamoDBtoEventBusPipe', {
-            name: 'EventOrderPipe',
+            name: 'EventOrderPipeV2',
             roleArn: pipeRole.roleArn,
             source: props.flightOrderTable.tableStreamArn!, // Ensure DynamoDB Streams is enabled on the table
             target: eventBus.eventBusArn,

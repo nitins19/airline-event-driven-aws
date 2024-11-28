@@ -35,7 +35,6 @@ export default class FlightOrdersTable extends Stack {
     flightEventsTableOld.applyRemovalPolicy(RemovalPolicy.DESTROY);
 
     this.exportValue(flightEventsTableOld.attrStreamArn);
-    this.exportValue(flightEventsTableOld.tableName);
 
     this.flightEventsTable = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
       keySchema: [
