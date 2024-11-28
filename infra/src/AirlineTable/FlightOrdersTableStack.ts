@@ -35,21 +35,18 @@ export default class FlightOrdersTable extends Stack {
 
     this.flightEventsTable.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
-    // this.flightEventsTableRestored = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
-    //   keySchema: [
-    //     { attributeName: 'passengerId', keyType: 'HASH' }
-    //   ],
-    //   attributeDefinitions: [
-    //     { attributeName: 'passengerId', attributeType: AttributeType.STRING }
-    //   ],
-    //   // replicas: flighteventReplicas,
-    //   replicas: [{
-    //     region: 'us-east-1'
-    //   }],
-    //   tableName: 'FlightOrderTable-1',
-    //   // streamSpecification: { streamViewType: StreamViewType.NEW_AND_OLD_IMAGES },
-    //   billingMode: BillingMode.PAY_PER_REQUEST,
-    // });
+    this.flightEventsTableRestored = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
+      keySchema: [
+        { attributeName: 'passengerId', keyType: 'HASH' }
+      ],
+      attributeDefinitions: [
+        { attributeName: 'passengerId', attributeType: AttributeType.STRING }
+      ],
+      replicas: flighteventReplicas,
+      tableName: 'FlightOrderTable-1',
+      streamSpecification: { streamViewType: StreamViewType.NEW_AND_OLD_IMAGES },
+      billingMode: BillingMode.PAY_PER_REQUEST,
+    });
 
   }
 
