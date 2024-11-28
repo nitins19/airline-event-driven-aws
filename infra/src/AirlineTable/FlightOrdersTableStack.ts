@@ -8,6 +8,7 @@ export interface FlightOrdersTableProps extends StackProps {
 
 export default class FlightOrdersTable extends Stack {
   readonly flightEventsTable: CfnGlobalTable;
+  readonly flightEventsTableRestored: CfnGlobalTable;
 
   constructor(scope: Construct, id: string, props: FlightOrdersTableProps) {
     super(scope, id, props);
@@ -33,6 +34,22 @@ export default class FlightOrdersTable extends Stack {
     });
 
     this.flightEventsTable.applyRemovalPolicy(RemovalPolicy.DESTROY);
+
+    this.flightEventsTableRestored = new CfnGlobalTable(this, 'FlightOrderEvents', {
+      keySchema: [
+        { attributeName: 'passengerId', keyType: 'HASH' }
+      ],
+      attributeDefinitions: [
+        { attributeName: 'passengerId', attributeType: AttributeType.STRING }
+      ],
+      // replicas: flighteventReplicas,
+      replicas: [{
+        region: 'us-east-1'
+      }],
+      tableName: 'FlightOrderTable-1',
+      // streamSpecification: { streamViewType: StreamViewType.NEW_AND_OLD_IMAGES },
+      billingMode: BillingMode.PAY_PER_REQUEST,
+    });
 
   }
 
