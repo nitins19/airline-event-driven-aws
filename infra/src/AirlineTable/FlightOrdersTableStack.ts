@@ -19,23 +19,6 @@ export default class FlightOrdersTable extends Stack {
       }
     });
 
-    const flightEventsTableOld = new CfnGlobalTable(this, 'FlightOrderEvents', {
-      keySchema: [
-        { attributeName: 'passengerId', keyType: 'HASH' }
-      ],
-      attributeDefinitions: [
-        { attributeName: 'passengerId', attributeType: AttributeType.STRING }
-      ],
-      replicas: flighteventReplicas,
-      tableName: 'FlightOrderTable',
-      streamSpecification: { streamViewType: StreamViewType.NEW_AND_OLD_IMAGES },
-      billingMode: BillingMode.PAY_PER_REQUEST,
-    });
-
-    flightEventsTableOld.applyRemovalPolicy(RemovalPolicy.DESTROY);
-
-    this.exportValue(flightEventsTableOld.attrStreamArn);
-
     this.flightEventsTable = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
       keySchema: [
         { attributeName: 'passengerId', keyType: 'HASH' }
