@@ -15,16 +15,19 @@
     "@types/node": "22.5.4",
     "@types/uuid": "^9.0.6",
     "aws-cdk-lib": "2.160.0",
-    "aws-sdk": "^2.1691.0",
-    "aws-lambda": "^1.0.7"
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1691.0"
   },
   "devDependencies": {
     "@aws-sdk/client-eventbridge": "^3.670.0",
     "@types/node": "22.5.4",
     "aws-cdk": "2.160.0",
     "aws-sdk": "^2.1691.0",
+    "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "typescript": "~5.6.2"
+    "typescript": "~5.6.2",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
   },
   "keywords": [],
   "author": "",
