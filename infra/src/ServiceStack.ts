@@ -106,7 +106,8 @@ export default class ServiceStack extends Stack {
             memorySize: 250,
             bundling: {
                 sourceMap: true,
-                minify: true
+                minify: true,
+                forceDockerBundling: false
             },
             logRetention: RetentionDays.FIVE_DAYS
         });
@@ -130,7 +131,8 @@ export default class ServiceStack extends Stack {
 
         const processOrderLambda = new NodejsFunction(this, "ProcessOrderLambda", {
             runtime: Runtime.NODEJS_18_X,
-            entry: path.join(__dirname, "../../../service/src/lambda/process-order.ts"),
+            entry: path.join(__dirname, "../../service/src/lambda/process-order.ts"),
+            memorySize: 250,
             handler: "handler",
             bundling: {
                 minify: true,
