@@ -2,7 +2,6 @@
   "name": "service",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "webpack",
     "cdk": "cdk",
