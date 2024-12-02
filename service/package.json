@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config webpack.config.js",
     "cdk": "cdk",
     "watch": "tsc -w"
   },
