@@ -17,18 +17,11 @@ jobs:
     with:
       package: infra
 
-  build-service:
-    name: "Build Service"
-    uses: ./.github/workflows/build.yml
-    with:
-      package: service
-      run-build-command: true
-      upload-artifact: true   
 
   deploy-dev:
     name: "Deploy"
     needs:
-      [build-infra, build-service]
+      [build-infra]
     uses: ./.github/workflows/deploy.yml
     with:
       aws-account-number: "954976306395"
