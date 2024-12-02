@@ -106,8 +106,7 @@ export default class ServiceStack extends Stack {
             memorySize: 250,
             bundling: {
                 sourceMap: true,
-                minify: true,
-                forceDockerBundling: false
+                minify: true
             },
             logRetention: RetentionDays.FIVE_DAYS
         });
@@ -136,8 +135,7 @@ export default class ServiceStack extends Stack {
             handler: "handler",
             bundling: {
                 minify: true,
-                sourceMap: true,
-                forceDockerBundling: false
+                sourceMap: true
             },
             environment: {
                 EVENT_BUS_NAME: eventBus.eventBusName
