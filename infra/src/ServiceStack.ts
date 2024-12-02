@@ -130,7 +130,7 @@ export default class ServiceStack extends Stack {
 
         const processOrderLambda = new NodejsFunction(this, "ProcessOrderLambda", {
             runtime: Runtime.NODEJS_18_X,
-            entry: path.join(__dirname, "../../service/src/lambda/process-order.ts"),
+            entry: '../service/src/lambda/process-order.ts',
             handler: "handler",
             bundling: {
                 minify: true,
