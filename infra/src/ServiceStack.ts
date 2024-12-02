@@ -37,7 +37,7 @@ export default class ServiceStack extends Stack {
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
             runtime: Runtime.NODEJS_18_X,
-            entry: path.join(__dirname, "../../service/src/lambda/order-placed.ts"),
+            entry: path.join(__dirname, "../../service/src/index.ts"),
             handler: "handler",
             timeout: Duration.seconds(10),
             memorySize: 250,

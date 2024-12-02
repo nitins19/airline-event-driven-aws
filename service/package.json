@@ -2,8 +2,9 @@
   "name": "service",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js",
+    "build": "webpack",
     "cdk": "cdk",
     "watch": "tsc -w"
   },
