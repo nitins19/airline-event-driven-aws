@@ -135,6 +135,7 @@ export default class ServiceStack extends Stack {
             bundling: {
                 minify: true,
                 sourceMap: true,
+                forceDockerBundling: false
             },
             environment: {
                 EVENT_BUS_NAME: eventBus.eventBusName
