@@ -2,6 +2,7 @@ import { Construct } from 'constructs';
 import { Stage, StageProps } from 'aws-cdk-lib';
 import FlightOrdersTable from './AirlineTable/FlightOrdersTableStack';
 import ServiceStack from './ServiceStack';
+import SourceTags from './SourceTags';
 
 export interface EnvironmentProps extends StageProps { }
 
@@ -28,6 +29,8 @@ export default class Environment extends Stage {
 
       stacks.push(flightOrdersTableStack);
       stacks.push(serviceStack);
+
+      stacks.forEach(stack => SourceTags.add(stack, {repoUrl: 'https://github.com/nitins19/airline-event-driven-aws'}));
     } else {
       throw new Error('Expected account and region to be defined in props.env');
     }
