@@ -128,6 +128,10 @@ export default class ServiceStack extends Stack {
             resultPath: "$.passStateResult",
         });
 
+        const path = require('path');
+console.log('tryingg',path.resolve(__dirname, '../../service/src/lambda/process-order.ts'));
+
+
         const processOrderLambda = new NodejsFunction(this, "ProcessOrderLambda", {
             runtime: Runtime.NODEJS_18_X,
             entry: '../../service/src/lambda/process-order.ts',
