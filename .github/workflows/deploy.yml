@@ -45,12 +45,6 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::${{ inputs.aws-account-number }}:role/oidc-access-role
         aws-region: us-east-1
-    - name: Download Artifact
-      if: ${{ inputs.download-artifact }}
-      uses: actions/download-artifact@v3
-      with:
-        name: service
-        path: service/dist  
     - name: CDK Bootstrap
       if: ${{ inputs.run-bootstrap-command }}
       run: pnpm exec cdk bootstrap aws://${{ inputs.aws-account-number }}/us-east-1
