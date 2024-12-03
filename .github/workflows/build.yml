@@ -34,7 +34,7 @@ jobs:
       run: npm install -g pnpm    
     - run: pnpm install
     - run: pnpm install --frozen-lockfile
-    - run: pnpm build
+    - run: pnpm build --verbose
       if: ${{ inputs.run-build-command }}
     - uses: actions/upload-artifact@v3
       if: ${{ inputs.upload-artifact }}

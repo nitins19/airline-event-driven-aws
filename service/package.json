@@ -8,24 +8,26 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "3.428.0",
-    "@aws-sdk/lib-dynamodb": "3.428.0",
+    "@aws-sdk/client-dynamodb": "^3.438.0",
+    "@aws-sdk/client-eventbridge": "^3.438.0",
+    "@aws-sdk/client-lambda": "^3.665.0",
+    "@aws-sdk/lib-dynamodb": "^3.438.0",
     "@aws-sdk/util-dynamodb": "^3.669.0",
     "@types/node": "22.5.4",
-    "@types/uuid": "^9.0.6",
+    "uuid": "^9.0.1",
     "aws-cdk-lib": "2.160.0",
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1691.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-eventbridge": "^3.670.0",
     "@types/aws-lambda": "^8.10.133",
     "@types/node": "22.5.4",
     "aws-cdk": "2.160.0",
     "aws-sdk": "^2.1691.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-
+    "@types/uuid": "^9.0.6",
+    "source-map-loader": "^4.0.1",
     "typescript": "~5.6.2",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
