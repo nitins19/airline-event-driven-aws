@@ -50,7 +50,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: service
-        path: service/dist  
+        path: ./service/dist  
     - name: CDK Bootstrap
       if: ${{ inputs.run-bootstrap-command }}
       run: pnpm exec cdk bootstrap aws://${{ inputs.aws-account-number }}/us-east-1
