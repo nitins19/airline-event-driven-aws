@@ -15,9 +15,7 @@ jobs:
     name: "Build Infra"
     uses: ./.github/workflows/build.yml
     with:
-      package: infra
-      run-build-command: true
-      upload-artifact: true  
+      package: infra 
 
   build-service:
     name: "Build Service"
