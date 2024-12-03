@@ -37,7 +37,7 @@ export default class ServiceStack extends Stack {
 
         const serviceLambda = new NodejsFunction(this, 'ServiceLambda', {
             runtime: Runtime.NODEJS_18_X,
-            entry: path.join(__dirname, "../service/src/index.ts"),
+            entry: "../service/src/index.ts",
             handler: "handler",
             timeout: Duration.seconds(10),
             memorySize: 250,
@@ -100,7 +100,7 @@ export default class ServiceStack extends Stack {
 
         const enrichmentLambda = new NodejsFunction(this, 'EnrichmentLambda', {
             runtime: Runtime.NODEJS_18_X,
-            entry: path.join(__dirname, "../../service/src/lambda/enrichment.ts"),
+            entry: '../service/src/lambda/enrichment.ts',
             handler: "handler",
             timeout: Duration.seconds(10),
             memorySize: 250,
@@ -130,7 +130,7 @@ export default class ServiceStack extends Stack {
 
         const processOrderLambda = new NodejsFunction(this, "ProcessOrderLambda", {
             runtime: Runtime.NODEJS_18_X,
-            entry: path.join(__dirname, "../../service/src/lambda/process-order.ts"),
+            entry: '../service/src/lambda/process-order.ts',
             memorySize: 250,
             handler: "handler",
             bundling: {
@@ -197,7 +197,7 @@ export default class ServiceStack extends Stack {
 
         const orderNotificationLambda = new NodejsFunction(this, "OrderNotificationLambda", {
             runtime: Runtime.NODEJS_18_X,
-            entry: path.join(__dirname, "../../service/src/lambda/order-notification.ts"),
+            entry: '../service/src/lambda/order-notification.ts',
             handler: "handler",
             role:lambdaRole,
             bundling: {
