@@ -36,6 +36,9 @@ importers:
       '@aws-sdk/client-eventbridge':
         specifier: ^3.670.0
         version: 3.670.0
+      '@types/aws-lambda':
+        specifier: ^8.10.133
+        version: 8.10.146
       aws-cdk:
         specifier: 2.160.0
         version: 2.160.0
@@ -676,6 +679,9 @@ packages:
 
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
+
+  '@types/aws-lambda@8.10.146':
+    resolution: {integrity: sha512-3BaDXYTh0e6UCJYL/jwV/3+GRslSc08toAiZSmleYtkAUyV5rtvdPYxrG/88uqvTuT6sb27WE9OS90ZNTIuQ0g==}
 
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
@@ -2788,6 +2794,8 @@ snapshots:
   '@tsconfig/node14@1.0.3': {}
 
   '@tsconfig/node16@1.0.4': {}
+
+  '@types/aws-lambda@8.10.146': {}
 
   '@types/eslint-scope@3.7.7':
     dependencies:
