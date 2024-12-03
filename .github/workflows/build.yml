@@ -34,9 +34,6 @@ jobs:
       run: npm install -g pnpm    
     - run: pnpm install
     - run: pnpm install --frozen-lockfile
-    - name: Debug Webpack Config
-      if: ${{ inputs.run-build-command }}
-      run: pnpm webpack --config webpack.config.js
     - run: pnpm build --progress
       if: ${{ inputs.run-build-command }}
     - uses: actions/upload-artifact@v3
