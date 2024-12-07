@@ -35,7 +35,7 @@ this.flightEventsTable = new CfnGlobalTable(this, 'FlightOrderEvents', {
       billingMode: BillingMode.PAY_PER_REQUEST,
     });
 
-    this.flightEventsTable.applyRemovalPolicy(RemovalPolicy.RETAIN);
+this.flightEventsTable.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
 
 const flightEventsTableRestored = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
