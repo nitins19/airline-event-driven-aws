@@ -63,7 +63,7 @@ cdk import --context ENVIRONMENT=dev "Dev/FlightOrdersTable"
 Detect Configuration Drift Before adding back the commented features, check for any configuration drifts to ensure your stack aligns with the actual AWS resources:
 
 ````markdown
-aws cloudformation describe-stack-resource-drifts --stack-name 'Dev-FlightOrdersTable' --stack-resource-drift-status-filters 'MODIFIED'
+aws cloudformation describe-stack-resource-drifts --stack-name 'Dev-<stackName>' --stack-resource-drift-status-filters 'MODIFIED'
 ````
 
 Step 3: Reintroduce Unrestored Properties Once the basic setup is complete.
