@@ -22,7 +22,7 @@ const flighteventReplicas: Array<CfnGlobalTable.ReplicaSpecificationProperty> = 
       }
     });
 
-    this.flightEventsTable = new CfnGlobalTable(this, 'FlightOrderEvents', { 
+this.flightEventsTable = new CfnGlobalTable(this, 'FlightOrderEvents', { 
       keySchema: [
         { attributeName: 'passengerId', keyType: 'HASH' }
       ],
@@ -38,8 +38,7 @@ const flighteventReplicas: Array<CfnGlobalTable.ReplicaSpecificationProperty> = 
     this.flightEventsTable.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
 
-
-    const flightEventsTableRestored = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
+const flightEventsTableRestored = new CfnGlobalTable(this, 'FlightOrderEvents-1', {
       keySchema: [
         { attributeName: 'passengerId', keyType: 'HASH' }
       ],
